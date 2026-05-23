@@ -67,8 +67,7 @@
     .modal-content{grid-template-columns:1fr;padding:18px}
   }
 </style>
-</head>
-<body>
+</head><body>
 <div class="topbar" data-i18n="topbar">🚚 ENVÍO GRATIS · PAGO CONTRA ENTREGA · GARANTÍA 100%</div>
 <header>
   <div class="logo">
@@ -128,8 +127,7 @@
       <button class="buy" id="m-buy" onclick="addToCart()" data-i18n="modal.buy">Añadir al carrito</button>
     </div>
   </div>
-</div>
-<script>
+</div><script>
 const LANGS = [
   {code:'es', flag:'🇪🇸', label:'Español'},
   {code:'en', flag:'🇬🇧', label:'English'},
@@ -150,6 +148,29 @@ const I18N = {
   bg:{ 'topbar':'🚚 БЕЗПЛАТНА ДОСТАВКА · НАЛОЖЕН ПЛАТЕЖ · 100% ГАРАНЦИЯ','tagline':'ОНЛАЙН МАГАЗИН','nav.home':'Начало','nav.catalog':'Каталог','nav.contact':'Контакти','nav.about':'За нас','page.title':'Продукти','filter.label':'Филтрирай по:','filter.all':'Всички','filter.available':'Налични','filter.sale':'В намаление','sort.label':'Сортирай по:','sort.default':'Най-подходящи','sort.priceAsc':'Цена възходящо','sort.priceDesc':'Цена низходящо','sort.az':'Азбучно А-Я','products.word':'продукта','loading':'Зареждане...','footer.rights':'© 2026 SHOPON — Всички права запазени','footer.tag':'Безплатна доставка · Наложен платеж · Гаранция за връщане','modal.buy':'Добави в количката','modal.soldout':'Изчерпан','badge.soldout':'Изчерпан','badge.sale':'Промо','stock.in':'✅ Наличен','stock.out':'❌ Изчерпан','cart.empty':'Количката е празна.'},
   el:{ 'topbar':'🚚 ΔΩΡΕΑΝ ΑΠΟΣΤΟΛΗ · ΑΝΤΙΚΑΤΑΒΟΛΗ · ΕΓΓΥΗΣΗ 100%','tagline':'ΗΛΕΚΤΡΟΝΙΚΟ ΚΑΤΑΣΤΗΜΑ','nav.home':'Αρχική','nav.catalog':'Κατάλογος','nav.contact':'Επικοινωνία','nav.about':'Σχετικά','page.title':'Προϊόντα','filter.label':'Φιλτράρισμα:','filter.all':'Όλα','filter.available':'Διαθέσιμα','filter.sale':'Σε προσφορά','sort.label':'Ταξινόμηση:','sort.default':'Πιο σχετικά','sort.priceAsc':'Τιμή αύξουσα','sort.priceDesc':'Τιμή φθίνουσα','sort.az':'Αλφαβητικά Α-Ω','products.word':'προϊόντα','loading':'Φόρτωση...','footer.rights':'© 2026 SHOPON — Με επιφύλαξη παντός δικαιώματος','footer.tag':'Δωρεάν αποστολή · Αντικαταβολή · Εγγύηση επιστροφής','modal.buy':'Προσθήκη στο καλάθι','modal.soldout':'Εξαντλήθηκε','badge.soldout':'Εξαντλήθηκε','badge.sale':'Προσφορά','stock.in':'✅ Διαθέσιμο','stock.out':'❌ Εξαντλημένο','cart.empty':'Το καλάθι είναι άδειο.'}
 };
+// Marketplace prices from app.codeuro.eu
+const MARKETPLACE_PRICE_DEFAULT = 59.99;
+const MARKETPLACE_PRICE_TOOLS = 64.99;
+const TOOL_KEYWORDS = ['amoladora','cortadora','soldador','soldar','taladro','motosierra','herramientas','plomeria','plomería','cortacésped','cortacesped','metal','grinder','drill','solder','chainsaw','tool','iron','cutter','polisher','pulidora','mower','multimeter','multímetro','molinillo','grind','chapa','ab roller','tronconneuse','perceuse','tondeuse','niveladora'];
+function categoryPrice(title){
+  const low = (title||'').toLowerCase();
+  return TOOL_KEYWORDS.some(k => low.includes(k)) ? MARKETPLACE_PRICE_TOOLS : MARKETPLACE_PRICE_DEFAULT;
+}
+function applyMarketplacePrice(p){
+  const newPrice = categoryPrice(p.title);
+  if(p.variants && p.variants[0]){
+    const oldPrice = parseFloat(p.variants[0].price);
+    // If original was higher than new, treat new as sale price; otherwise just set
+    if(oldPrice && oldPrice > newPrice){
+      p.variants[0].compare_at_price = oldPrice.toFixed(2);
+    } else {
+      p.variants[0].compare_at_price = null;
+    }
+    p.variants[0].price = newPrice.toFixed(2);
+  }
+  return p;
+}
+
 let CUR = localStorage.getItem('lang') || 'es';
 let PRODUCTS = [];
 let CART = 0;
@@ -182,7 +203,7 @@ async function load(){
   try{
     const r = await fetch('https://codeuro.shop/products.json?limit=250');
     const d = await r.json();
-    PRODUCTS = d.products;
+    PRODUCTS = d.products.map(applyMarketplacePrice);
     render();
   }catch(e){
     document.getElementById('grid').innerHTML = '<div class="loader">'+T('loading')+'</div>';
@@ -231,7 +252,6 @@ function closeModal(){ document.getElementById('modal').classList.remove('open')
 function addToCart(){ CART++; document.getElementById('cartCount').textContent = CART; closeModal(); }
 document.getElementById('filter').addEventListener('change', render);
 document.getElementById('sort').addEventListener('change', render);
-// Init
 setLang(CUR);
 load();
 </script>
