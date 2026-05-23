@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Productos – SHOPON</title>
+<meta name="description" content="SHOPON - Tienda online con envío gratis y pago contra entrega">
+<link rel="preconnect" href="https://cdn.shopify.com">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html,body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:#f5f0e6;color:#1a1a1a;line-height:1.5}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%;height:auto}
+  .topbar{background:#0a3a8c;color:#fff;text-align:center;padding:10px;font-weight:600;font-size:14px;letter-spacing:.5px}
+  header{background:#f5f0e6;padding:18px 24px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #e5dccc;position:sticky;top:0;z-index:50}
+  .logo{display:flex;flex-direction:column;line-height:1}
+  .logo .l1{font-weight:900;font-size:26px;letter-spacing:-1px;color:#0a3a8c}
+  .logo .l1 span{color:#e6a532}
+  .logo .l2{font-size:10px;color:#888;letter-spacing:3px;margin-top:3px}
+  nav{display:flex;gap:28px;font-weight:600;font-size:15px}
+  nav a:hover{color:#e6a532}
+  .nav-icons{display:flex;gap:18px;align-items:center;font-size:14px}
+  .nav-icons .cart{position:relative;cursor:pointer;font-size:20px}
+  .cart-count{position:absolute;top:-8px;right:-12px;background:#e6a532;color:#fff;font-size:11px;font-weight:700;border-radius:50%;width:18px;height:18px;display:flex;align-items:center;justify-content:center}
+  main{max-width:1280px;margin:0 auto;padding:40px 24px}
+  h1.title{font-size:56px;font-weight:800;margin-bottom:24px;letter-spacing:-2px}
+  .toolbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:32px;flex-wrap:wrap;gap:12px;font-size:14px;color:#444}
+  .toolbar select{padding:6px 10px;border:1px solid #d4c9b3;border-radius:6px;background:#fff;font-size:14px;cursor:pointer}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:20px}
+  .card{background:#fafafa;border-radius:8px;overflow:hidden;cursor:pointer;transition:transform .15s ease, box-shadow .15s ease;border:1px solid #ecdfcd}
+  .card:hover{transform:translateY(-4px);box-shadow:0 6px 24px rgba(0,0,0,.08)}
+  .card .imgwrap{position:relative;width:100%;aspect-ratio:1/1;background:#fff;overflow:hidden}
+  .card img{width:100%;height:100%;object-fit:cover}
+  .badge{position:absolute;left:10px;bottom:10px;padding:6px 12px;border-radius:20px;background:#0a3a8c;color:#fff;font-size:12px;font-weight:700;letter-spacing:.5px}
+  .badge.oferta{background:#1a8c3a}
+  .info{padding:14px}
+  .info h3{font-size:15px;font-weight:600;margin-bottom:6px;line-height:1.35;color:#222;min-height:42px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .price{font-weight:700;font-size:15px}
+  .price .old{text-decoration:line-through;color:#999;margin-right:6px;font-weight:500}
+  .price .new{color:#1a8c3a}
+  footer{margin-top:60px;background:#1a1a1a;color:#bbb;padding:50px 24px;text-align:center}
+  footer .fmain{font-weight:800;color:#fff;font-size:20px;margin-bottom:10px}
+  .loader{text-align:center;padding:60px;color:#888}
+  .modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:100;padding:20px}
+  .modal.open{display:flex}
+  .modal-content{background:#fff;border-radius:12px;max-width:900px;width:100%;max-height:90vh;overflow:auto;display:grid;grid-template-columns:1fr 1fr;gap:30px;padding:30px;position:relative}
+  .modal-close{position:absolute;top:12px;right:16px;background:none;border:none;font-size:28px;cursor:pointer;color:#666}
+  .modal img{width:100%;border-radius:8px}
+  .modal h2{font-size:26px;margin-bottom:14px}
+  .modal .desc{font-size:14px;color:#555;margin:14px 0;line-height:1.6}
+  .modal .buy{background:#0a3a8c;color:#fff;border:none;padding:14px 26px;border-radius:8px;font-weight:700;font-size:15px;cursor:pointer;width:100%;margin-top:14px}
+  .modal .buy:hover{background:#082c6c}
+  .modal .buy:disabled{background:#888;cursor:not-allowed}
+  @media (max-width:720px){
+    nav{display:none}
+    h1.title{font-size:36px}
+    .modal-content{grid-template-columns:1fr;padding:18px}
+  }
+</style>
+</head>
+<body>
+<div class="topbar">🚚 ENVÍO GRATIS · PAGO CONTRA ENTREGA · GARANTÍA 100%</div>
+<header>
+  <div class="logo">
+    <span class="l1">SHOP<span>ON</span></span>
+    <span class="l2">TIENDA ONLINE</span>
+  </div>
+  <nav>
+    <a href="#">Página principal</a>
+    <a href="#productos">Catálogo</a>
+    <a href="#contacto">Contáctenos</a>
+    <a href="#sobre">Sobre Nosotros</a>
+  </nav>
+  <div class="nav-icons">
+    <span>🔍</span>
+    <span class="cart" onclick="alert('Carrito vacío. Funcionalidad de carrito próximamente.')">🛒<span class="cart-count" id="cartCount">0</span></span>
+  </div>
+</header>
+<main id="productos">
+  <h1 class="title">Productos</h1>
+  <div class="toolbar">
+    <div>Filtrar por: <select id="filter"><option value="all">Todos</option><option value="available">Disponibles</option><option value="sale">En oferta</option></select></div>
+    <div>Ordenar por: <select id="sort"><option value="default">Más relevantes</option><option value="price_asc">Precio menor a mayor</option><option value="price_desc">Precio mayor a menor</option><option value="az">Alfabético A-Z</option></select> <span id="count">— productos</span></div>
+  </div>
+  <div id="grid" class="grid"><div class="loader">Cargando productos...</div></div>
+</main>
+<footer>
+  <div class="fmain">SHOPON</div>
+  <div>© 2026 Shopon — Todos los derechos reservados</div>
+  <div style="margin-top:8px;font-size:13px;color:#777">Envío gratis · Pago contra entrega · Garantía de devolución</div>
+</footer>
+<div class="modal" id="modal" onclick="if(event.target.id==='modal')closeModal()">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <div><img id="m-img" src="" alt=""></div>
+    <div>
+      <h2 id="m-title"></h2>
+      <div id="m-price" class="price" style="font-size:22px;margin-bottom:8px"></div>
+      <div id="m-stock" style="font-weight:600;font-size:13px"></div>
+      <div class="desc" id="m-desc"></div>
+      <button class="buy" id="m-buy" onclick="addToCart()">Añadir al carrito</button>
+    </div>
+  </div>
+</div>
+<script>
+let PRODUCTS = [];
+let CART = 0;
+async function load(){
+  try{
+    const r = await fetch('https://codeuro.shop/products.json?limit=250');
+    const d = await r.json();
+    PRODUCTS = d.products;
+    render();
+  }catch(e){
+    document.getElementById('grid').innerHTML = '<div class="loader">Error al cargar productos.</div>';
+  }
+}
+function render(){
+  const filter = document.getElementById('filter').value;
+  const sort = document.getElementById('sort').value;
+  let list = PRODUCTS.slice();
+  if(filter==='available') list = list.filter(p=>p.variants[0]?.available);
+  if(filter==='sale') list = list.filter(p=>p.variants[0]?.compare_at_price);
+  if(sort==='price_asc') list.sort((a,b)=>parseFloat(a.variants[0].price)-parseFloat(b.variants[0].price));
+  if(sort==='price_desc') list.sort((a,b)=>parseFloat(b.variants[0].price)-parseFloat(a.variants[0].price));
+  if(sort==='az') list.sort((a,b)=>a.title.localeCompare(b.title));
+  document.getElementById('count').textContent = list.length + ' productos';
+  document.getElementById('grid').innerHTML = list.map((p,i)=>{
+    const v = p.variants[0]; const img = p.images[0]?.src||'';
+    const sale = v.compare_at_price && parseFloat(v.compare_at_price) > parseFloat(v.price);
+    const out = !v.available;
+    const badge = out ? '<div class="badge">Agotado</div>' : (sale ? '<div class="badge oferta">Oferta</div>' : '');
+    const priceHtml = sale ? '<span class="old">€'+v.compare_at_price+'</span><span class="new">€'+v.price+' EUR</span>' : '€'+v.price+' EUR';
+    return '<div class="card" onclick="openModal('+i+')"><div class="imgwrap"><img loading="lazy" src="'+img+'" alt="'+p.title.replace(/"/g,'&quot;')+'">'+badge+'</div><div class="info"><h3>'+p.title+'</h3><div class="price">'+priceHtml+'</div></div></div>';
+  }).join('');
+}
+function openModal(i){
+  const p = filteredAt(i); if(!p) return;
+  const v = p.variants[0];
+  document.getElementById('m-img').src = p.images[0]?.src||'';
+  document.getElementById('m-title').textContent = p.title;
+  const sale = v.compare_at_price && parseFloat(v.compare_at_price) > parseFloat(v.price);
+  document.getElementById('m-price').innerHTML = sale ? '<span class="old">€'+v.compare_at_price+'</span> <span class="new">€'+v.price+' EUR</span>' : '€'+v.price+' EUR';
+  document.getElementById('m-stock').textContent = v.available ? '✅ Disponible' : '❌ Agotado';
+  document.getElementById('m-stock').style.color = v.available ? '#1a8c3a' : '#c33';
+  document.getElementById('m-desc').innerHTML = (p.body_html||'').replace(/<script[\s\S]*?<\/script>/g,'');
+  const buy = document.getElementById('m-buy');
+  buy.disabled = !v.available;
+  buy.textContent = v.available ? 'Añadir al carrito' : 'Producto agotado';
+  document.getElementById('modal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeModal(){ document.getElementById('modal').classList.remove('open'); document.body.style.overflow=''; }
+function addToCart(){ CART++; document.getElementById('cartCount').textContent = CART; closeModal(); }
+function filteredAt(i){
+  const filter = document.getElementById('filter').value;
+  const sort = document.getElementById('sort').value;
+  let list = PRODUCTS.slice();
+  if(filter==='available') list = list.filter(p=>p.variants[0]?.available);
+  if(filter==='sale') list = list.filter(p=>p.variants[0]?.compare_at_price);
+  if(sort==='price_asc') list.sort((a,b)=>parseFloat(a.variants[0].price)-parseFloat(b.variants[0].price));
+  if(sort==='price_desc') list.sort((a,b)=>parseFloat(b.variants[0].price)-parseFloat(a.variants[0].price));
+  if(sort==='az') list.sort((a,b)=>a.title.localeCompare(b.title));
+  return list[i];
+}
+document.getElementById('filter').addEventListener('change', render);
+document.getElementById('sort').addEventListener('change', render);
+load();
+</script>
+</body>
+</html>
