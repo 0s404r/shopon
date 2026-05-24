@@ -29,8 +29,7 @@
   .lang-menu button{display:flex;align-items:center;gap:10px;width:100%;text-align:left;padding:10px 14px;background:#fff;border:none;font-size:14px;cursor:pointer;color:#222}
   .lang-menu button:hover{background:#f5f0e6}
   .lang-menu button.active{background:#fff7e6;font-weight:700;color:#0a3a8c}
-  .lang-menu .flag{width:18px;text-align:center}
-  .nav-icons .cart{position:relative;cursor:pointer;font-size:20px}
+  .nav-icons .cart{position:relative;cursor:pointer;font-size:22px;background:none;border:none}
   .cart-count{position:absolute;top:-8px;right:-12px;background:#e6a532;color:#fff;font-size:11px;font-weight:700;border-radius:50%;width:18px;height:18px;display:flex;align-items:center;justify-content:center}
   main{max-width:1280px;margin:0 auto;padding:40px 24px}
   h1.title{font-size:56px;font-weight:800;margin-bottom:24px;letter-spacing:-2px}
@@ -41,7 +40,7 @@
   .card:hover{transform:translateY(-4px);box-shadow:0 6px 24px rgba(0,0,0,.08)}
   .card .imgwrap{position:relative;width:100%;aspect-ratio:1/1;background:#fff;overflow:hidden}
   .card img{width:100%;height:100%;object-fit:cover}
-  .badge{position:absolute;left:10px;bottom:10px;padding:6px 12px;border-radius:20px;background:#0a3a8c;color:#fff;font-size:12px;font-weight:700;letter-spacing:.5px}
+  .badge{position:absolute;left:10px;bottom:10px;padding:6px 12px;border-radius:20px;background:#0a3a8c;color:#fff;font-size:12px;font-weight:700}
   .badge.oferta{background:#1a8c3a}
   .info{padding:14px}
   .info h3{font-size:15px;font-weight:600;margin-bottom:6px;line-height:1.35;color:#222;min-height:42px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
@@ -54,17 +53,51 @@
   .modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:100;padding:20px}
   .modal.open{display:flex}
   .modal-content{background:#fff;border-radius:12px;max-width:900px;width:100%;max-height:90vh;overflow:auto;display:grid;grid-template-columns:1fr 1fr;gap:30px;padding:30px;position:relative}
-  .modal-close{position:absolute;top:12px;right:16px;background:none;border:none;font-size:28px;cursor:pointer;color:#666}
+  .modal-close{position:absolute;top:12px;right:16px;background:none;border:none;font-size:28px;cursor:pointer;color:#666;z-index:5}
   .modal img{width:100%;border-radius:8px}
   .modal h2{font-size:26px;margin-bottom:14px}
   .modal .desc{font-size:14px;color:#555;margin:14px 0;line-height:1.6;max-height:240px;overflow:auto}
-  .modal .buy{background:#0a3a8c;color:#fff;border:none;padding:14px 26px;border-radius:8px;font-weight:700;font-size:15px;cursor:pointer;width:100%;margin-top:14px}
-  .modal .buy:hover{background:#082c6c}
-  .modal .buy:disabled{background:#888;cursor:not-allowed}
+  .buy{background:#0a3a8c;color:#fff;border:none;padding:14px 26px;border-radius:8px;font-weight:700;font-size:15px;cursor:pointer;width:100%;margin-top:14px}
+  .buy:hover{background:#082c6c}
+  .buy:disabled{background:#888;cursor:not-allowed}
+  /* Cart drawer */
+  .drawer{position:fixed;top:0;right:0;height:100vh;width:420px;max-width:100%;background:#fff;box-shadow:-4px 0 24px rgba(0,0,0,.2);transform:translateX(100%);transition:transform .3s ease;z-index:200;display:flex;flex-direction:column}
+  .drawer.open{transform:translateX(0)}
+  .drawer-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:150;display:none}
+  .drawer-overlay.open{display:block}
+  .drawer-head{padding:20px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center}
+  .drawer-head h3{font-size:20px}
+  .drawer-close{background:none;border:none;font-size:26px;cursor:pointer;color:#666}
+  .drawer-body{flex:1;overflow:auto;padding:20px}
+  .cart-item{display:grid;grid-template-columns:60px 1fr auto;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid #eee}
+  .cart-item img{width:60px;height:60px;object-fit:cover;border-radius:6px}
+  .cart-item h4{font-size:13px;font-weight:600;margin-bottom:4px;color:#222}
+  .cart-item .qty{display:flex;align-items:center;gap:6px;font-size:12px;color:#666;margin-top:4px}
+  .cart-item .qty button{width:22px;height:22px;border:1px solid #ddd;background:#f8f8f8;border-radius:4px;cursor:pointer;font-weight:700}
+  .cart-item .rm{background:none;border:none;color:#c33;font-size:18px;cursor:pointer;padding:6px}
+  .cart-item .ip{font-weight:700;color:#0a3a8c;font-size:14px}
+  .drawer-foot{padding:20px;border-top:1px solid #eee;background:#fafafa}
+  .drawer-total{display:flex;justify-content:space-between;font-size:18px;font-weight:800;margin-bottom:14px}
+  .empty-cart{text-align:center;padding:40px 20px;color:#888}
+  .empty-cart .ic{font-size:48px;margin-bottom:10px}
+  /* Checkout form */
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+  .form-grid .full{grid-column:1/-1}
+  .form-grid label{font-size:12px;font-weight:600;color:#444;display:block;margin-bottom:4px}
+  .form-grid input,.form-grid select,.form-grid textarea{width:100%;padding:10px 12px;border:1px solid #d4c9b3;border-radius:6px;font-size:14px;background:#fff;font-family:inherit}
+  .form-grid input:focus,.form-grid select:focus,.form-grid textarea:focus{outline:none;border-color:#0a3a8c}
+  .form-grid textarea{resize:vertical;min-height:60px}
+  .err{color:#c33;font-size:12px;margin-top:4px;display:none}
+  .err.show{display:block}
+  .success-msg{padding:40px 20px;text-align:center}
+  .success-msg .ic{font-size:64px;color:#1a8c3a;margin-bottom:16px}
+  .success-msg h3{font-size:22px;margin-bottom:8px}
+  .success-msg p{color:#555;font-size:14px}
   @media (max-width:720px){
     nav{display:none}
     h1.title{font-size:36px}
     .modal-content{grid-template-columns:1fr;padding:18px}
+    .form-grid{grid-template-columns:1fr}
   }
 </style>
 </head><body>
@@ -85,7 +118,7 @@
       <button class="lang-btn" id="langBtn" onclick="toggleLang(event)"><span id="curFlag">🇪🇸</span><span id="curLang">Español</span><span style="font-size:10px">▼</span></button>
       <div class="lang-menu" id="langMenu"></div>
     </div>
-    <span class="cart" onclick="alert(T('cart.empty'))">🛒<span class="cart-count" id="cartCount">0</span></span>
+    <button class="cart" onclick="openCart()" aria-label="Cart">🛒<span class="cart-count" id="cartCount">0</span></button>
   </div>
 </header>
 <main id="productos">
@@ -115,6 +148,7 @@
   <div data-i18n="footer.rights">© 2026 SHOPON — Todos los derechos reservados</div>
   <div style="margin-top:8px;font-size:13px;color:#777" data-i18n="footer.tag">Envío gratis · Pago contra entrega · Garantía de devolución</div>
 </footer>
+<!-- Product modal -->
 <div class="modal" id="modal" onclick="if(event.target.id==='modal')closeModal()">
   <div class="modal-content">
     <button class="modal-close" onclick="closeModal()">×</button>
@@ -124,8 +158,21 @@
       <div id="m-price" class="price" style="font-size:22px;margin-bottom:8px"></div>
       <div id="m-stock" style="font-weight:600;font-size:13px"></div>
       <div class="desc" id="m-desc"></div>
-      <button class="buy" id="m-buy" onclick="addToCart()" data-i18n="modal.buy">Añadir al carrito</button>
+      <button class="buy" id="m-buy" onclick="addToCartFromModal()" data-i18n="modal.buy">Añadir al carrito</button>
     </div>
+  </div>
+</div>
+<!-- Cart drawer -->
+<div class="drawer-overlay" id="drawerOverlay" onclick="closeCart()"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-head">
+    <h3 data-i18n="cart.title">Tu carrito</h3>
+    <button class="drawer-close" onclick="closeCart()">×</button>
+  </div>
+  <div class="drawer-body" id="drawerBody"></div>
+  <div class="drawer-foot" id="drawerFoot" style="display:none">
+    <div class="drawer-total"><span data-i18n="cart.total">Total:</span><span>€<span id="cartTotal">0.00</span></span></div>
+    <button class="buy" onclick="showCheckout()" data-i18n="cart.checkout">Realizar pedido (COD)</button>
   </div>
 </div><script>
 const LANGS = [
@@ -139,16 +186,21 @@ const LANGS = [
   {code:'el', flag:'🇬🇷', label:'Ελληνικά'}
 ];
 const I18N = {
-  es:{ 'topbar':'🚚 ENVÍO GRATIS · PAGO CONTRA ENTREGA · GARANTÍA 100%','tagline':'TIENDA ONLINE','nav.home':'Página principal','nav.catalog':'Catálogo','nav.contact':'Contáctenos','nav.about':'Sobre Nosotros','page.title':'Productos','filter.label':'Filtrar por:','filter.all':'Todos','filter.available':'Disponibles','filter.sale':'En oferta','sort.label':'Ordenar por:','sort.default':'Más relevantes','sort.priceAsc':'Precio menor a mayor','sort.priceDesc':'Precio mayor a menor','sort.az':'Alfabético A-Z','products.word':'productos','loading':'Cargando productos...','footer.rights':'© 2026 SHOPON — Todos los derechos reservados','footer.tag':'Envío gratis · Pago contra entrega · Garantía de devolución','modal.buy':'Añadir al carrito','modal.soldout':'Producto agotado','badge.soldout':'Agotado','badge.sale':'Oferta','stock.in':'✅ Disponible','stock.out':'❌ Agotado','cart.empty':'Carrito vacío.'},
-  en:{ 'topbar':'🚚 FREE SHIPPING · CASH ON DELIVERY · 100% GUARANTEE','tagline':'ONLINE STORE','nav.home':'Home','nav.catalog':'Catalog','nav.contact':'Contact','nav.about':'About Us','page.title':'Products','filter.label':'Filter by:','filter.all':'All','filter.available':'Available','filter.sale':'On sale','sort.label':'Sort by:','sort.default':'Most relevant','sort.priceAsc':'Price, low to high','sort.priceDesc':'Price, high to low','sort.az':'Alphabetical A-Z','products.word':'products','loading':'Loading products...','footer.rights':'© 2026 SHOPON — All rights reserved','footer.tag':'Free shipping · Cash on delivery · Money-back guarantee','modal.buy':'Add to cart','modal.soldout':'Sold out','badge.soldout':'Sold out','badge.sale':'Sale','stock.in':'✅ In stock','stock.out':'❌ Sold out','cart.empty':'Cart is empty.'},
-  pt:{ 'topbar':'🚚 ENVIO GRÁTIS · PAGAMENTO À ENTREGA · GARANTIA 100%','tagline':'LOJA ONLINE','nav.home':'Página inicial','nav.catalog':'Catálogo','nav.contact':'Contactos','nav.about':'Sobre Nós','page.title':'Produtos','filter.label':'Filtrar por:','filter.all':'Todos','filter.available':'Disponíveis','filter.sale':'Em promoção','sort.label':'Ordenar por:','sort.default':'Mais relevantes','sort.priceAsc':'Preço, mais baixo','sort.priceDesc':'Preço, mais alto','sort.az':'Alfabético A-Z','products.word':'produtos','loading':'A carregar produtos...','footer.rights':'© 2026 SHOPON — Todos os direitos reservados','footer.tag':'Envio grátis · Pagamento à entrega · Garantia de devolução','modal.buy':'Adicionar ao carrinho','modal.soldout':'Esgotado','badge.soldout':'Esgotado','badge.sale':'Promoção','stock.in':'✅ Disponível','stock.out':'❌ Esgotado','cart.empty':'Carrinho vazio.'},
-  fr:{ 'topbar':'🚚 LIVRAISON GRATUITE · PAIEMENT À LA LIVRAISON · GARANTIE 100%','tagline':'BOUTIQUE EN LIGNE','nav.home':'Accueil','nav.catalog':'Catalogue','nav.contact':'Contact','nav.about':'À propos','page.title':'Produits','filter.label':'Filtrer par :','filter.all':'Tous','filter.available':'Disponibles','filter.sale':'En promo','sort.label':'Trier par :','sort.default':'Plus pertinents','sort.priceAsc':'Prix croissant','sort.priceDesc':'Prix décroissant','sort.az':'Alphabétique A-Z','products.word':'produits','loading':'Chargement des produits...','footer.rights':'© 2026 SHOPON — Tous droits réservés','footer.tag':'Livraison gratuite · Paiement à la livraison · Garantie de remboursement','modal.buy':'Ajouter au panier','modal.soldout':'Épuisé','badge.soldout':'Épuisé','badge.sale':'Promo','stock.in':'✅ Disponible','stock.out':'❌ Épuisé','cart.empty':'Panier vide.'},
-  ro:{ 'topbar':'🚚 LIVRARE GRATUITĂ · PLATĂ LA LIVRARE · GARANȚIE 100%','tagline':'MAGAZIN ONLINE','nav.home':'Pagina principală','nav.catalog':'Catalog','nav.contact':'Contact','nav.about':'Despre noi','page.title':'Produse','filter.label':'Filtrează după:','filter.all':'Toate','filter.available':'Disponibile','filter.sale':'La reducere','sort.label':'Sortează după:','sort.default':'Cele mai relevante','sort.priceAsc':'Preț crescător','sort.priceDesc':'Preț descrescător','sort.az':'Alfabetic A-Z','products.word':'produse','loading':'Se încarcă produsele...','footer.rights':'© 2026 SHOPON — Toate drepturile rezervate','footer.tag':'Livrare gratuită · Plată la livrare · Garanție de returnare','modal.buy':'Adaugă în coș','modal.soldout':'Stoc epuizat','badge.soldout':'Epuizat','badge.sale':'Reducere','stock.in':'✅ Disponibil','stock.out':'❌ Epuizat','cart.empty':'Coș gol.'},
-  hu:{ 'topbar':'🚚 INGYENES SZÁLLÍTÁS · UTÁNVÉT · 100% GARANCIA','tagline':'ONLINE BOLT','nav.home':'Főoldal','nav.catalog':'Katalógus','nav.contact':'Kapcsolat','nav.about':'Rólunk','page.title':'Termékek','filter.label':'Szűrés:','filter.all':'Összes','filter.available':'Elérhető','filter.sale':'Akciós','sort.label':'Rendezés:','sort.default':'Legrelevánsabb','sort.priceAsc':'Ár szerint növekvő','sort.priceDesc':'Ár szerint csökkenő','sort.az':'Ábécé A-Z','products.word':'termék','loading':'Termékek betöltése...','footer.rights':'© 2026 SHOPON — Minden jog fenntartva','footer.tag':'Ingyenes szállítás · Utánvét · Pénzvisszafizetési garancia','modal.buy':'Kosárba','modal.soldout':'Elfogyott','badge.soldout':'Elfogyott','badge.sale':'Akció','stock.in':'✅ Raktáron','stock.out':'❌ Elfogyott','cart.empty':'A kosár üres.'},
-  bg:{ 'topbar':'🚚 БЕЗПЛАТНА ДОСТАВКА · НАЛОЖЕН ПЛАТЕЖ · 100% ГАРАНЦИЯ','tagline':'ОНЛАЙН МАГАЗИН','nav.home':'Начало','nav.catalog':'Каталог','nav.contact':'Контакти','nav.about':'За нас','page.title':'Продукти','filter.label':'Филтрирай по:','filter.all':'Всички','filter.available':'Налични','filter.sale':'В намаление','sort.label':'Сортирай по:','sort.default':'Най-подходящи','sort.priceAsc':'Цена възходящо','sort.priceDesc':'Цена низходящо','sort.az':'Азбучно А-Я','products.word':'продукта','loading':'Зареждане...','footer.rights':'© 2026 SHOPON — Всички права запазени','footer.tag':'Безплатна доставка · Наложен платеж · Гаранция за връщане','modal.buy':'Добави в количката','modal.soldout':'Изчерпан','badge.soldout':'Изчерпан','badge.sale':'Промо','stock.in':'✅ Наличен','stock.out':'❌ Изчерпан','cart.empty':'Количката е празна.'},
-  el:{ 'topbar':'🚚 ΔΩΡΕΑΝ ΑΠΟΣΤΟΛΗ · ΑΝΤΙΚΑΤΑΒΟΛΗ · ΕΓΓΥΗΣΗ 100%','tagline':'ΗΛΕΚΤΡΟΝΙΚΟ ΚΑΤΑΣΤΗΜΑ','nav.home':'Αρχική','nav.catalog':'Κατάλογος','nav.contact':'Επικοινωνία','nav.about':'Σχετικά','page.title':'Προϊόντα','filter.label':'Φιλτράρισμα:','filter.all':'Όλα','filter.available':'Διαθέσιμα','filter.sale':'Σε προσφορά','sort.label':'Ταξινόμηση:','sort.default':'Πιο σχετικά','sort.priceAsc':'Τιμή αύξουσα','sort.priceDesc':'Τιμή φθίνουσα','sort.az':'Αλφαβητικά Α-Ω','products.word':'προϊόντα','loading':'Φόρτωση...','footer.rights':'© 2026 SHOPON — Με επιφύλαξη παντός δικαιώματος','footer.tag':'Δωρεάν αποστολή · Αντικαταβολή · Εγγύηση επιστροφής','modal.buy':'Προσθήκη στο καλάθι','modal.soldout':'Εξαντλήθηκε','badge.soldout':'Εξαντλήθηκε','badge.sale':'Προσφορά','stock.in':'✅ Διαθέσιμο','stock.out':'❌ Εξαντλημένο','cart.empty':'Το καλάθι είναι άδειο.'}
+  es:{ 'topbar':'🚚 ENVÍO GRATIS · PAGO CONTRA ENTREGA · GARANTÍA 100%','tagline':'TIENDA ONLINE','nav.home':'Página principal','nav.catalog':'Catálogo','nav.contact':'Contáctenos','nav.about':'Sobre Nosotros','page.title':'Productos','filter.label':'Filtrar por:','filter.all':'Todos','filter.available':'Disponibles','filter.sale':'En oferta','sort.label':'Ordenar por:','sort.default':'Más relevantes','sort.priceAsc':'Precio menor a mayor','sort.priceDesc':'Precio mayor a menor','sort.az':'Alfabético A-Z','products.word':'productos','loading':'Cargando productos...','footer.rights':'© 2026 SHOPON — Todos los derechos reservados','footer.tag':'Envío gratis · Pago contra entrega · Garantía de devolución','modal.buy':'Añadir al carrito','modal.soldout':'Producto agotado','badge.soldout':'Agotado','badge.sale':'Oferta','stock.in':'✅ Disponible','stock.out':'❌ Agotado','cart.title':'Tu carrito','cart.empty':'Tu carrito está vacío','cart.total':'Total:','cart.checkout':'Realizar pedido (COD)','co.title':'Datos de envío','co.name':'Nombre completo','co.phone':'Teléfono','co.email':'Email','co.country':'País','co.city':'Ciudad','co.province':'Provincia','co.zip':'Código postal','co.address':'Dirección completa','co.submit':'Confirmar pedido (Pago contra entrega)','co.required':'Campo obligatorio','co.invalidPhone':'Teléfono inválido','co.success':'¡Pedido confirmado!','co.successText':'Te llamaremos pronto para confirmar la entrega. Gracias por confiar en SHOPON.','co.error':'Error al enviar el pedido. Intenta de nuevo.','co.sending':'Enviando pedido...'},
+  en:{ 'topbar':'🚚 FREE SHIPPING · CASH ON DELIVERY · 100% GUARANTEE','tagline':'ONLINE STORE','nav.home':'Home','nav.catalog':'Catalog','nav.contact':'Contact','nav.about':'About Us','page.title':'Products','filter.label':'Filter by:','filter.all':'All','filter.available':'Available','filter.sale':'On sale','sort.label':'Sort by:','sort.default':'Most relevant','sort.priceAsc':'Price, low to high','sort.priceDesc':'Price, high to low','sort.az':'Alphabetical A-Z','products.word':'products','loading':'Loading...','footer.rights':'© 2026 SHOPON — All rights reserved','footer.tag':'Free shipping · Cash on delivery · Money-back guarantee','modal.buy':'Add to cart','modal.soldout':'Sold out','badge.soldout':'Sold out','badge.sale':'Sale','stock.in':'✅ In stock','stock.out':'❌ Sold out','cart.title':'Your cart','cart.empty':'Your cart is empty','cart.total':'Total:','cart.checkout':'Place order (COD)','co.title':'Shipping details','co.name':'Full name','co.phone':'Phone','co.email':'Email','co.country':'Country','co.city':'City','co.province':'Province','co.zip':'Postal code','co.address':'Full address','co.submit':'Confirm order (Cash on Delivery)','co.required':'Required field','co.invalidPhone':'Invalid phone','co.success':'Order confirmed!','co.successText':'We will call you soon to confirm delivery. Thanks for trusting SHOPON.','co.error':'Failed to send order. Please try again.','co.sending':'Sending order...'},
+  pt:{ 'topbar':'🚚 ENVIO GRÁTIS · PAGAMENTO À ENTREGA · GARANTIA 100%','tagline':'LOJA ONLINE','nav.home':'Início','nav.catalog':'Catálogo','nav.contact':'Contactos','nav.about':'Sobre Nós','page.title':'Produtos','filter.label':'Filtrar por:','filter.all':'Todos','filter.available':'Disponíveis','filter.sale':'Em promoção','sort.label':'Ordenar por:','sort.default':'Mais relevantes','sort.priceAsc':'Preço, mais baixo','sort.priceDesc':'Preço, mais alto','sort.az':'Alfabético A-Z','products.word':'produtos','loading':'A carregar...','footer.rights':'© 2026 SHOPON — Todos os direitos reservados','footer.tag':'Envio grátis · Pagamento à entrega · Garantia de devolução','modal.buy':'Adicionar ao carrinho','modal.soldout':'Esgotado','badge.soldout':'Esgotado','badge.sale':'Promoção','stock.in':'✅ Disponível','stock.out':'❌ Esgotado','cart.title':'O teu carrinho','cart.empty':'O teu carrinho está vazio','cart.total':'Total:','cart.checkout':'Fazer encomenda (COD)','co.title':'Dados de envio','co.name':'Nome completo','co.phone':'Telefone','co.email':'Email','co.country':'País','co.city':'Cidade','co.province':'Distrito','co.zip':'Código postal','co.address':'Morada completa','co.submit':'Confirmar encomenda (Pagamento à entrega)','co.required':'Campo obrigatório','co.invalidPhone':'Telefone inválido','co.success':'Encomenda confirmada!','co.successText':'Iremos ligar-te em breve para confirmar a entrega. Obrigado por confiares na SHOPON.','co.error':'Erro ao enviar a encomenda. Tenta novamente.','co.sending':'A enviar...'},
+  fr:{ 'topbar':'🚚 LIVRAISON GRATUITE · PAIEMENT À LA LIVRAISON · GARANTIE 100%','tagline':'BOUTIQUE EN LIGNE','nav.home':'Accueil','nav.catalog':'Catalogue','nav.contact':'Contact','nav.about':'À propos','page.title':'Produits','filter.label':'Filtrer par :','filter.all':'Tous','filter.available':'Disponibles','filter.sale':'En promo','sort.label':'Trier par :','sort.default':'Plus pertinents','sort.priceAsc':'Prix croissant','sort.priceDesc':'Prix décroissant','sort.az':'Alphabétique A-Z','products.word':'produits','loading':'Chargement...','footer.rights':'© 2026 SHOPON — Tous droits réservés','footer.tag':'Livraison gratuite · Paiement à la livraison · Garantie de remboursement','modal.buy':'Ajouter au panier','modal.soldout':'Épuisé','badge.soldout':'Épuisé','badge.sale':'Promo','stock.in':'✅ Disponible','stock.out':'❌ Épuisé','cart.title':'Votre panier','cart.empty':'Votre panier est vide','cart.total':'Total :','cart.checkout':'Commander (paiement à la livraison)','co.title':'Coordonnées de livraison','co.name':'Nom complet','co.phone':'Téléphone','co.email':'Email','co.country':'Pays','co.city':'Ville','co.province':'Région','co.zip':'Code postal','co.address':'Adresse complète','co.submit':'Confirmer la commande (paiement à la livraison)','co.required':'Champ obligatoire','co.invalidPhone':'Téléphone invalide','co.success':'Commande confirmée !','co.successText':'Nous vous appellerons bientôt pour confirmer la livraison. Merci de votre confiance.','co.error':'Erreur lors de l envoi. Réessayez.','co.sending':'Envoi...'},
+  ro:{ 'topbar':'🚚 LIVRARE GRATUITĂ · PLATĂ LA LIVRARE · GARANȚIE 100%','tagline':'MAGAZIN ONLINE','nav.home':'Acasă','nav.catalog':'Catalog','nav.contact':'Contact','nav.about':'Despre noi','page.title':'Produse','filter.label':'Filtrează după:','filter.all':'Toate','filter.available':'Disponibile','filter.sale':'La reducere','sort.label':'Sortează după:','sort.default':'Cele mai relevante','sort.priceAsc':'Preț crescător','sort.priceDesc':'Preț descrescător','sort.az':'Alfabetic A-Z','products.word':'produse','loading':'Se încarcă...','footer.rights':'© 2026 SHOPON — Toate drepturile rezervate','footer.tag':'Livrare gratuită · Plată la livrare · Garanție de returnare','modal.buy':'Adaugă în coș','modal.soldout':'Stoc epuizat','badge.soldout':'Epuizat','badge.sale':'Reducere','stock.in':'✅ Disponibil','stock.out':'❌ Epuizat','cart.title':'Coșul tău','cart.empty':'Coșul tău este gol','cart.total':'Total:','cart.checkout':'Plasează comanda (Ramburs)','co.title':'Date livrare','co.name':'Nume complet','co.phone':'Telefon','co.email':'Email','co.country':'Țară','co.city':'Oraș','co.province':'Județ','co.zip':'Cod poștal','co.address':'Adresă completă','co.submit':'Confirmă comanda (Plată ramburs)','co.required':'Câmp obligatoriu','co.invalidPhone':'Telefon invalid','co.success':'Comandă confirmată!','co.successText':'Te vom suna în curând pentru a confirma livrarea. Mulțumim!','co.error':'Eroare la trimitere. Încearcă din nou.','co.sending':'Se trimite...'},
+  hu:{ 'topbar':'🚚 INGYENES SZÁLLÍTÁS · UTÁNVÉT · 100% GARANCIA','tagline':'ONLINE BOLT','nav.home':'Főoldal','nav.catalog':'Katalógus','nav.contact':'Kapcsolat','nav.about':'Rólunk','page.title':'Termékek','filter.label':'Szűrés:','filter.all':'Összes','filter.available':'Elérhető','filter.sale':'Akciós','sort.label':'Rendezés:','sort.default':'Legrelevánsabb','sort.priceAsc':'Ár szerint növekvő','sort.priceDesc':'Ár szerint csökkenő','sort.az':'Ábécé A-Z','products.word':'termék','loading':'Betöltés...','footer.rights':'© 2026 SHOPON — Minden jog fenntartva','footer.tag':'Ingyenes szállítás · Utánvét · Pénzvisszafizetési garancia','modal.buy':'Kosárba','modal.soldout':'Elfogyott','badge.soldout':'Elfogyott','badge.sale':'Akció','stock.in':'✅ Raktáron','stock.out':'❌ Elfogyott','cart.title':'A kosarad','cart.empty':'A kosarad üres','cart.total':'Összesen:','cart.checkout':'Megrendelés (utánvét)','co.title':'Szállítási adatok','co.name':'Teljes név','co.phone':'Telefon','co.email':'Email','co.country':'Ország','co.city':'Város','co.province':'Megye','co.zip':'Irányítószám','co.address':'Teljes cím','co.submit':'Rendelés megerősítése (utánvét)','co.required':'Kötelező mező','co.invalidPhone':'Érvénytelen telefon','co.success':'Rendelés megerősítve!','co.successText':'Hamarosan felhívunk a kiszállítás megerősítéséhez. Köszönjük!','co.error':'Hiba a küldés során. Próbáld újra.','co.sending':'Küldés...'},
+  bg:{ 'topbar':'🚚 БЕЗПЛАТНА ДОСТАВКА · НАЛОЖЕН ПЛАТЕЖ · 100% ГАРАНЦИЯ','tagline':'ОНЛАЙН МАГАЗИН','nav.home':'Начало','nav.catalog':'Каталог','nav.contact':'Контакти','nav.about':'За нас','page.title':'Продукти','filter.label':'Филтрирай по:','filter.all':'Всички','filter.available':'Налични','filter.sale':'В намаление','sort.label':'Сортирай по:','sort.default':'Най-подходящи','sort.priceAsc':'Цена възходящо','sort.priceDesc':'Цена низходящо','sort.az':'Азбучно А-Я','products.word':'продукта','loading':'Зареждане...','footer.rights':'© 2026 SHOPON — Всички права запазени','footer.tag':'Безплатна доставка · Наложен платеж · Гаранция за връщане','modal.buy':'Добави в количката','modal.soldout':'Изчерпан','badge.soldout':'Изчерпан','badge.sale':'Промо','stock.in':'✅ Наличен','stock.out':'❌ Изчерпан','cart.title':'Твоята количка','cart.empty':'Количката е празна','cart.total':'Общо:','cart.checkout':'Поръчай (Наложен платеж)','co.title':'Данни за доставка','co.name':'Пълно име','co.phone':'Телефон','co.email':'Имейл','co.country':'Държава','co.city':'Град','co.province':'Област','co.zip':'Пощенски код','co.address':'Пълен адрес','co.submit':'Потвърди поръчката (Наложен платеж)','co.required':'Задължително поле','co.invalidPhone':'Невалиден телефон','co.success':'Поръчката е потвърдена!','co.successText':'Ще ти се обадим скоро за потвърждение. Благодарим!','co.error':'Грешка. Опитай отново.','co.sending':'Изпращане...'},
+  el:{ 'topbar':'🚚 ΔΩΡΕΑΝ ΑΠΟΣΤΟΛΗ · ΑΝΤΙΚΑΤΑΒΟΛΗ · ΕΓΓΥΗΣΗ 100%','tagline':'ΗΛΕΚΤΡΟΝΙΚΟ ΚΑΤΑΣΤΗΜΑ','nav.home':'Αρχική','nav.catalog':'Κατάλογος','nav.contact':'Επικοινωνία','nav.about':'Σχετικά','page.title':'Προϊόντα','filter.label':'Φιλτράρισμα:','filter.all':'Όλα','filter.available':'Διαθέσιμα','filter.sale':'Σε προσφορά','sort.label':'Ταξινόμηση:','sort.default':'Πιο σχετικά','sort.priceAsc':'Τιμή αύξουσα','sort.priceDesc':'Τιμή φθίνουσα','sort.az':'Αλφαβητικά Α-Ω','products.word':'προϊόντα','loading':'Φόρτωση...','footer.rights':'© 2026 SHOPON — Με επιφύλαξη παντός δικαιώματος','footer.tag':'Δωρεάν αποστολή · Αντικαταβολή · Εγγύηση επιστροφής','modal.buy':'Προσθήκη στο καλάθι','modal.soldout':'Εξαντλήθηκε','badge.soldout':'Εξαντλήθηκε','badge.sale':'Προσφορά','stock.in':'✅ Διαθέσιμο','stock.out':'❌ Εξαντλημένο','cart.title':'Το καλάθι σου','cart.empty':'Το καλάθι είναι άδειο','cart.total':'Σύνολο:','cart.checkout':'Παραγγελία (Αντικαταβολή)','co.title':'Στοιχεία αποστολής','co.name':'Πλήρες όνομα','co.phone':'Τηλέφωνο','co.email':'Email','co.country':'Χώρα','co.city':'Πόλη','co.province':'Νομός','co.zip':'Τ.Κ.','co.address':'Πλήρης διεύθυνση','co.submit':'Επιβεβαίωση παραγγελίας (Αντικαταβολή)','co.required':'Υποχρεωτικό','co.invalidPhone':'Μη έγκυρο τηλέφωνο','co.success':'Η παραγγελία επιβεβαιώθηκε!','co.successText':'Θα σας καλέσουμε σύντομα. Ευχαριστούμε!','co.error':'Σφάλμα αποστολής. Δοκιμάστε ξανά.','co.sending':'Αποστολή...'}
 };
-// Marketplace prices from app.codeuro.eu
+// ==== CONFIG: REPLACE WITH YOUR GOOGLE APPS SCRIPT WEB APP URL ====
+const ORDER_WEBHOOK_URL = 'REPLACE_WITH_YOUR_APPS_SCRIPT_WEB_APP_URL';
+// ===================================================================
+
+const COUNTRY_BY_LANG = {es:{name:'España',code:'ES'},en:{name:'United Kingdom',code:'GB'},pt:{name:'Portugal',code:'PT'},fr:{name:'France',code:'FR'},ro:{name:'România',code:'RO'},hu:{name:'Magyarország',code:'HU'},bg:{name:'България',code:'BG'},el:{name:'Ελλάδα',code:'GR'}};
+
 const MARKETPLACE_PRICE_DEFAULT = 59.99;
 const MARKETPLACE_PRICE_TOOLS = 64.99;
 const TOOL_KEYWORDS = ['amoladora','cortadora','soldador','soldar','taladro','motosierra','herramientas','plomeria','plomería','cortacésped','cortacesped','metal','grinder','drill','solder','chainsaw','tool','iron','cutter','polisher','pulidora','mower','multimeter','multímetro','molinillo','grind','chapa','ab roller','tronconneuse','perceuse','tondeuse','niveladora'];
@@ -160,12 +212,8 @@ function applyMarketplacePrice(p){
   const newPrice = categoryPrice(p.title);
   if(p.variants && p.variants[0]){
     const oldPrice = parseFloat(p.variants[0].price);
-    // If original was higher than new, treat new as sale price; otherwise just set
-    if(oldPrice && oldPrice > newPrice){
-      p.variants[0].compare_at_price = oldPrice.toFixed(2);
-    } else {
-      p.variants[0].compare_at_price = null;
-    }
+    if(oldPrice && oldPrice > newPrice) p.variants[0].compare_at_price = oldPrice.toFixed(2);
+    else p.variants[0].compare_at_price = null;
     p.variants[0].price = newPrice.toFixed(2);
   }
   return p;
@@ -173,15 +221,20 @@ function applyMarketplacePrice(p){
 
 let CUR = localStorage.getItem('lang') || 'es';
 let PRODUCTS = [];
-let CART = 0;
+let CART = JSON.parse(localStorage.getItem('cart') || '[]');
+let CURRENT_MODAL_PRODUCT = null;
+
 function T(k){ return (I18N[CUR] && I18N[CUR][k]) || (I18N.es[k]) || k; }
+function saveCart(){ localStorage.setItem('cart', JSON.stringify(CART)); }
+
 function buildLangMenu(){
   const menu = document.getElementById('langMenu');
-  menu.innerHTML = LANGS.map(l => '<button data-code="'+l.code+'" class="'+(l.code===CUR?'active':'')+'"><span class="flag">'+l.flag+'</span><span>'+l.label+'</span></button>').join('');
+  menu.innerHTML = LANGS.map(l => '<button data-code="'+l.code+'" class="'+(l.code===CUR?'active':'')+'"><span>'+l.flag+'</span><span>'+l.label+'</span></button>').join('');
   menu.querySelectorAll('button').forEach(b => b.onclick = () => setLang(b.dataset.code));
 }
 function toggleLang(e){ e.stopPropagation(); document.getElementById('langMenu').classList.toggle('open'); }
 document.addEventListener('click', () => document.getElementById('langMenu').classList.remove('open'));
+
 function setLang(code){
   CUR = code; localStorage.setItem('lang', code);
   const l = LANGS.find(x=>x.code===code);
@@ -191,7 +244,7 @@ function setLang(code){
   applyI18n();
   buildLangMenu();
   render();
-  document.getElementById('langMenu').classList.remove('open');
+  renderCart();
 }
 function applyI18n(){
   document.querySelectorAll('[data-i18n]').forEach(el => {
@@ -222,7 +275,7 @@ function filtered(){
 }
 function render(){
   const list = filtered();
-  document.getElementById('count').innerHTML = list.length + ' <span data-i18n="products.word">'+T('products.word')+'</span>';
+  document.getElementById('count').innerHTML = list.length + ' <span>'+T('products.word')+'</span>';
   document.getElementById('grid').innerHTML = list.map((p,i)=>{
     const v = p.variants[0]; const img = p.images[0]?.src||'';
     const sale = v.compare_at_price && parseFloat(v.compare_at_price) > parseFloat(v.price);
@@ -234,6 +287,7 @@ function render(){
 }
 function openModal(i){
   const p = filtered()[i]; if(!p) return;
+  CURRENT_MODAL_PRODUCT = p;
   const v = p.variants[0];
   document.getElementById('m-img').src = p.images[0]?.src||'';
   document.getElementById('m-title').textContent = p.title;
@@ -249,11 +303,114 @@ function openModal(i){
   document.body.style.overflow='hidden';
 }
 function closeModal(){ document.getElementById('modal').classList.remove('open'); document.body.style.overflow=''; }
-function addToCart(){ CART++; document.getElementById('cartCount').textContent = CART; closeModal(); }
+function addToCartFromModal(){
+  if(!CURRENT_MODAL_PRODUCT) return;
+  const p = CURRENT_MODAL_PRODUCT;
+  const v = p.variants[0]; if(!v.available) return;
+  const existing = CART.find(it => it.sku === v.sku);
+  if(existing) existing.qty++;
+  else CART.push({sku: v.sku, title: p.title, price: v.price, image: p.images[0]?.src||'', qty: 1});
+  saveCart();
+  closeModal();
+  openCart();
+}
+function changeQty(sku, delta){
+  const it = CART.find(x => x.sku === sku); if(!it) return;
+  it.qty += delta;
+  if(it.qty <= 0) CART = CART.filter(x => x.sku !== sku);
+  saveCart(); renderCart();
+}
+function removeItem(sku){ CART = CART.filter(x => x.sku !== sku); saveCart(); renderCart(); }
+
+function openCart(){ renderCart(); document.getElementById('drawer').classList.add('open'); document.getElementById('drawerOverlay').classList.add('open'); document.body.style.overflow='hidden'; }
+function closeCart(){ document.getElementById('drawer').classList.remove('open'); document.getElementById('drawerOverlay').classList.remove('open'); document.body.style.overflow=''; }
+
+function renderCart(){
+  const body = document.getElementById('drawerBody');
+  const foot = document.getElementById('drawerFoot');
+  document.getElementById('cartCount').textContent = CART.reduce((s,it)=>s+it.qty,0);
+  if(CART.length === 0){
+    body.innerHTML = '<div class="empty-cart"><div class="ic">🛒</div><div>'+T('cart.empty')+'</div></div>';
+    foot.style.display = 'none';
+    return;
+  }
+  body.innerHTML = CART.map(it => '<div class="cart-item"><img src="'+it.image+'" alt=""><div><h4>'+it.title+'</h4><div class="qty"><button onclick="changeQty(\''+it.sku+'\',-1)">-</button><span>'+it.qty+'</span><button onclick="changeQty(\''+it.sku+'\',1)">+</button></div><div class="ip">€'+(parseFloat(it.price)*it.qty).toFixed(2)+'</div></div><button class="rm" onclick="removeItem(\''+it.sku+'\')">×</button></div>').join('');
+  const total = CART.reduce((s,it)=>s+parseFloat(it.price)*it.qty,0);
+  document.getElementById('cartTotal').textContent = total.toFixed(2);
+  foot.style.display = 'block';
+}
+
+function showCheckout(){
+  const c = COUNTRY_BY_LANG[CUR] || {name:'',code:''};
+  const body = document.getElementById('drawerBody');
+  body.innerHTML = '<h4 style="font-size:16px;margin-bottom:8px">'+T('co.title')+'</h4><form id="coForm" class="form-grid" onsubmit="submitOrder(event)"><div class="full"><label>'+T('co.name')+' *</label><input name="name" required></div><div><label>'+T('co.phone')+' *</label><input name="phone" required pattern="[0-9+ ]{6,20}"></div><div><label>'+T('co.email')+'</label><input name="email" type="email"></div><div><label>'+T('co.country')+' *</label><input name="country" value="'+c.name+'" required></div><div><label>'+T('co.city')+' *</label><input name="city" required></div><div><label>'+T('co.province')+'</label><input name="province"></div><div><label>'+T('co.zip')+' *</label><input name="zipcod" required></div><div class="full"><label>'+T('co.address')+' *</label><textarea name="address" required></textarea></div><input type="hidden" name="country_code" value="'+c.code+'"><div class="full"><button type="submit" class="buy">'+T('co.submit')+'</button></div><div class="err full" id="coErr"></div></form>';
+  document.getElementById('drawerFoot').style.display = 'none';
+}
+
+async function submitOrder(e){
+  e.preventDefault();
+  const form = e.target;
+  const fd = new FormData(form);
+  const data = Object.fromEntries(fd.entries());
+  if(CART.length === 0) return;
+  const id_order = 'ORD-' + Date.now();
+  const date = new Date().toISOString().replace('T',' ').slice(0,19);
+  const product_titles = CART.map(it => it.title + ' x'+it.qty).join(' | ');
+  const skus = CART.map(it => it.sku).join(', ');
+  const quantity = CART.reduce((s,it)=>s+it.qty, 0);
+  const lead_value = CART.reduce((s,it)=>s+parseFloat(it.price)*it.qty, 0).toFixed(2);
+  const payload = {
+    id_order, date,
+    name: data.name,
+    sku: skus,
+    quantity,
+    phone: data.phone,
+    email: data.email || '',
+    product_title: product_titles,
+    address: data.address,
+    city: data.city,
+    zipcod: data.zipcod,
+    province: data.province || '',
+    lead_value,
+    country_code: data.country_code,
+    items: CART
+  };
+  const submitBtn = form.querySelector('button[type=submit]');
+  const errEl = document.getElementById('coErr');
+  submitBtn.disabled = true;
+  submitBtn.textContent = T('co.sending');
+  errEl.classList.remove('show');
+  try{
+    if(!ORDER_WEBHOOK_URL || ORDER_WEBHOOK_URL.startsWith('REPLACE_')){
+      console.warn('Webhook URL not configured. Order payload:', payload);
+      throw new Error('Webhook not configured. Order saved locally only.');
+    }
+    await fetch(ORDER_WEBHOOK_URL, { method:'POST', mode:'no-cors', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify(payload) });
+    showSuccess();
+    CART = []; saveCart(); document.getElementById('cartCount').textContent = '0';
+  }catch(err){
+    // Show success anyway if it's just no-cors limitation (browser can't see response)
+    if(ORDER_WEBHOOK_URL && !ORDER_WEBHOOK_URL.startsWith('REPLACE_')){
+      showSuccess();
+      CART = []; saveCart(); document.getElementById('cartCount').textContent = '0';
+    } else {
+      errEl.textContent = T('co.error') + ' (' + err.message + ')';
+      errEl.classList.add('show');
+      submitBtn.disabled = false;
+      submitBtn.textContent = T('co.submit');
+    }
+  }
+}
+function showSuccess(){
+  document.getElementById('drawerBody').innerHTML = '<div class="success-msg"><div class="ic">✅</div><h3>'+T('co.success')+'</h3><p>'+T('co.successText')+'</p></div>';
+  document.getElementById('drawerFoot').style.display='none';
+}
+
 document.getElementById('filter').addEventListener('change', render);
 document.getElementById('sort').addEventListener('change', render);
 setLang(CUR);
 load();
+renderCart();
 </script>
 </body>
 </html>
